@@ -1,5 +1,5 @@
 Categories:
-  - Phone & SMS
+  - Phone
 License: MIT
 AuthorName: Zoltán KADA
 AuthorEmail: kada.zoli@gmail.com
@@ -16,25 +16,25 @@ Description: |-
 
     Features:
     * Customizable reply templates
-    * Automatic replies to incoming calls/messages  
+    * Automatic replies to incoming calls/messages
     * Multilingual support (English, German, Spanish, French, Hungarian, Polish, Russian, Chinese)
     * Starts on boot and runs as a background service
 
-    The app allows users to set up automated responses for SMS messages and incoming calls, 
+    The app allows users to set up automated responses for SMS messages and incoming calls,
     making it easier to manage communication when you're busy or unavailable.
 
 RepoType: git
 Repo: https://github.com/kzolti/sms-reply
 
 Builds:
-  - versionName: '1.0'
-    versionCode: 1
-    commit: v1.0
+  - versionName: '1.1'
+    versionCode: 2
+    commit: v1.1
     subdir: app
     gradle:
       - yes
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: '1.0'
-CurrentVersionCode: 1
+CurrentVersion: '1.1'
+CurrentVersionCode: 2
