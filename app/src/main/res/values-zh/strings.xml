@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">短信自动回复</string>
+    <string name="add_template">添加模板</string>
+    <string name="edit_message">编辑消息</string>
+    <string name="delete_message">删除消息</string>
+    <string name="start_service">启动服务</string>
+    <string name="stop_service">停止服务</string>
+    <string name="manage_messages">管理消息</string>
+    <string name="exit_app">退出应用</string>
+    <string name="status_active">状态：运行中\n正在监控未接来电。</string>
+    <string name="status_stopped">状态：已停止\n不发送短信。</string>
+    <string name="checking_permissions">正在检查权限...</string>
+    <string name="missing_permissions">缺少权限。\n请允许以继续运行。</string>
+    <string name="active_message_prefix">当前消息：\n</string>
+    <string name="delete_message_title">删除消息</string>
+    <string name="delete_message_confirm">您确定要删除此消息吗？</string>
+    <string name="delete_button">删除</string>
+    <string name="cancel_button">取消</string>
+    <string name="save_button">保存</string>
+    <string name="new_message_title">新消息</string>
+    <string name="edit_message_title">编辑消息</string>
+    <string name="enter_sms_hint">输入短信内容...</string>
+    <string name="default_template_text">假期休息，即将恢复营业。请勿回复，这是自动消息。</string>
+    <string name="battery_opt_title">电池优化</string>
+    <string name="battery_opt_message">为确保 SMS Reply 持续运行，请关闭此应用的电池优化。</string>
+    <string name="battery_opt_settings">设置</string>
+    <string name="battery_opt_skip">跳过</string>
+    <string name="battery_opt_manual_title">需要手动设置</string>
+    <string name="battery_opt_manual_message">请前往 设置 > 电池 > 电池优化，并将 SMS Reply 排除在优化范围之外。</string>
+    <string name="ok_button">确定</string>
+    <string name="start_on_boot">设备启动时启动</string>
+</resources>

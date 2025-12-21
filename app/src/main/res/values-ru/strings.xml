@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SMS Ответ</string>
+    <string name="add_template">Добавить шаблон</string>
+    <string name="edit_message">Изменить сообщение</string>
+    <string name="delete_message">Удалить сообщение</string>
+    <string name="start_service">Запустить сервис</string>
+    <string name="stop_service">Остановить сервис</string>
+    <string name="manage_messages">Управление сообщениями</string>
+    <string name="exit_app">Выйти из приложения</string>
+    <string name="status_active">Статус: АКТИВЕН\nМониторинг пропущенных звонков.</string>
+    <string name="status_stopped">Статус: ОСТАНОВЛЕН\nSMS не отправляются.</string>
+    <string name="checking_permissions">Проверка разрешений...</string>
+    <string name="missing_permissions">Отсутствуют разрешения.\nПожалуйста, разрешите для работы.</string>
+    <string name="active_message_prefix">Активное сообщение:\n</string>
+    <string name="delete_message_title">Удалить сообщение</string>
+    <string name="delete_message_confirm">Вы уверены, что хотите удалить это сообщение?</string>
+    <string name="delete_button">Удалить</string>
+    <string name="cancel_button">Отмена</string>
+    <string name="save_button">Сохранить</string>
+    <string name="new_message_title">Новое сообщение</string>
+    <string name="edit_message_title">Изменить сообщение</string>
+    <string name="enter_sms_hint">Введите SMS сообщение...</string>
+    <string name="default_template_text">Закрыто на каникулы. Скоро откроемся. Пожалуйста, не отвечайте, это автоматическое сообщение.</string>
+    <string name="battery_opt_title">Оптимизация батареи</string>
+    <string name="battery_opt_message">Чтобы обеспечить непрерывную работу SMS Reply, пожалуйста, отключите оптимизацию батареи для этого приложения.</string>
+    <string name="battery_opt_settings">Настройки</string>
+    <string name="battery_opt_skip">Пропустить</string>
+    <string name="battery_opt_manual_title">Требуется ручная настройка</string>
+    <string name="battery_opt_manual_message">Пожалуйста, перейдите в Настройки > Батарея > Оптимизация батареи и исключите SMS Reply из оптимизации.</string>
+    <string name="ok_button">ОК</string>
+    <string name="start_on_boot">Запускать при загрузке устройства</string>
+</resources>

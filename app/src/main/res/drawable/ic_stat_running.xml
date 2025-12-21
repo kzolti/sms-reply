@@ -1,0 +1,19 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    
+    <!-- A4 Portrait Document pushed to left with cut-out lines -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M0,1c-0.6,0 -1,0.4 -1,1v20c0,0.6 0.4,1 1,1h11c0.6,0 1,-0.4 1,-1V2c0,-0.6 -0.4,-1 -1,-1H0z M1,5h9v1H1z M1,8h9v1H1z M1,11h7v1H1z M1,14h8v1H1z M1,17h6v1H1z"/>
+    
+    <!-- Larger Reply Arrow Badge with much larger cut-out arrow -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M18,6c3.3,0 6,2.7 6,6s-2.7,6 -6,6s-6,-2.7 -6,-6s2.7,-6 6,-6z M13.5,12l4,-4v3h4v2h-4v3z"/>
+        
+</vector>

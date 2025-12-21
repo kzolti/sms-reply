@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SMS Antwort</string>
+    <string name="add_template">Vorlage hinzufügen</string>
+    <string name="edit_message">Nachricht bearbeiten</string>
+    <string name="delete_message">Nachricht löschen</string>
+    <string name="start_service">Dienst starten</string>
+    <string name="stop_service">Dienst stoppen</string>
+    <string name="manage_messages">Nachrichten verwalten</string>
+    <string name="exit_app">App beenden</string>
+    <string name="status_active">Status: AKTIV\nÜberwache verpasste Anrufe.</string>
+    <string name="status_stopped">Status: GESTOPPT\nKein SMS-Versand.</string>
+    <string name="checking_permissions">Berechtigungen prüfen...</string>
+    <string name="missing_permissions">Fehlende Berechtigungen.\nBitte erlauben Sie die Funktion.</string>
+    <string name="active_message_prefix">Aktive Nachricht:\n</string>
+    <string name="delete_message_title">Nachricht löschen</string>
+    <string name="delete_message_confirm">Sind Sie sicher, dass Sie diese Nachricht löschen möchten?</string>
+    <string name="delete_button">Löschen</string>
+    <string name="cancel_button">Abbrechen</string>
+    <string name="save_button">Speichern</string>
+    <string name="new_message_title">Neue Nachricht</string>
+    <string name="edit_message_title">Nachricht bearbeiten</string>
+    <string name="enter_sms_hint">SMS-Nachricht eingeben...</string>
+    <string name="default_template_text">Wegen Urlaub geschlossen. Wir öffnen bald wieder. Bitte antworten Sie nicht, dies ist eine automatische Nachricht.</string>
+    <string name="battery_opt_title">Akku-Optimierung</string>
+    <string name="battery_opt_message">Um sicherzustellen, dass SMS Reply kontinuierlich funktioniert, deaktivieren Sie bitte die Akku-Optimierung für diese App.</string>
+    <string name="battery_opt_settings">Einstellungen</string>
+    <string name="battery_opt_skip">Überspringen</string>
+    <string name="battery_opt_manual_title">Manuelle Einrichtung erforderlich</string>
+    <string name="battery_opt_manual_message">Bitte gehen Sie zu Einstellungen > Akku > Akku-Optimierung und schließen Sie SMS Reply von der Optimierung aus.</string>
+    <string name="ok_button">OK</string>
+    <string name="start_on_boot">Beim Gerätestart starten</string>
+</resources>

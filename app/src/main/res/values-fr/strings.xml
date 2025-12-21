@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Réponse SMS</string>
+    <string name="add_template">Ajouter un modèle</string>
+    <string name="edit_message">Modifier le message</string>
+    <string name="delete_message">Supprimer le message</string>
+    <string name="start_service">Démarrer le service</string>
+    <string name="stop_service">Arrêter le service</string>
+    <string name="manage_messages">Gérer les messages</string>
+    <string name="exit_app">Quitter l\'app</string>
+    <string name="status_active">Statut: ACTIF\nSurveillance des appels manqués.</string>
+    <string name="status_stopped">Statut: ARRÊTÉ\nPas d\'envoi de SMS.</string>
+    <string name="checking_permissions">Vérification des permissions...</string>
+    <string name="missing_permissions">Permissions manquantes.\nVeuillez autoriser pour fonctionner.</string>
+    <string name="active_message_prefix">Message actif:\n</string>
+    <string name="delete_message_title">Supprimer le message</string>
+    <string name="delete_message_confirm">Êtes-vous sûr de vouloir supprimer ce message?</string>
+    <string name="delete_button">Supprimer</string>
+    <string name="cancel_button">Annuler</string>
+    <string name="save_button">Enregistrer</string>
+    <string name="new_message_title">Nouveau message</string>
+    <string name="default_template_text">Fermé pour les vacances. Réouverture prochainement. S\'il vous plaît ne pas répondre, ceci est un message automatique.</string>
+    <string name="battery_opt_title">Optimisation de la batterie</string>
+    <string name="battery_opt_message">Pour s\'assurer que SMS Reply fonctionne en continu, veuillez désactiver l\'optimisation de la batterie pour cette application.</string>
+    <string name="battery_opt_settings">Paramètres</string>
+    <string name="battery_opt_skip">Passer</string>
+    <string name="battery_opt_manual_title">Configuration manuelle requise</string>
+    <string name="battery_opt_manual_message">Veuillez aller dans Paramètres > Batterie > Optimisation de la batterie et exclure SMS Reply de l\'optimisation.</string>
+    <string name="ok_button">OK</string>
+    <string name="start_on_boot">Démarrer au démarrage de l\'appareil</string>
+    <string name="edit_message_title">Modifier le message</string>
+    <string name="enter_sms_hint">Saisir le message SMS...</string>
+</resources>

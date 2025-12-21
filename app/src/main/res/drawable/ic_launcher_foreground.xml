@@ -1,0 +1,31 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Main SMS Bubble -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M25,35c-5.5,0 -10,4.5 -10,10v20c0,5.5 4.5,10 10,10h8l8,8v-8h17c5.5,0 10,-4.5 10,-10V45c0,-5.5 -4.5,-10 -10,-10H25z"/>
+    
+    <!-- Message Lines -->
+    <path
+        android:fillColor="#006064"
+        android:pathData="M30,45h25v3H30z"/>
+    <path
+        android:fillColor="#006064"
+        android:pathData="M30,52h20v3H30z"/>
+    <path
+        android:fillColor="#006064"
+        android:pathData="M30,59h15v3H30z"/>
+    
+    <!-- Reply Arrow Badge -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M75,25c8.3,0 15,6.7 15,15s-6.7,15 -15,15s-15,-6.7 -15,-15s6.7,-15 15,-15z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M70,40l5,-5v3h8v4h-8v3z"/>
+        
+</vector>

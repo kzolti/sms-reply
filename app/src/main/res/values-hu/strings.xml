@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SMS Válaszoló</string>
+    <string name="add_template">Sablon hozzáadása</string>
+    <string name="edit_message">Üzenet szerkesztése</string>
+    <string name="delete_message">Üzenet törlése</string>
+    <string name="start_service">Szolgáltatás Indítása</string>
+    <string name="stop_service">Szolgáltatás Leállítása</string>
+    <string name="manage_messages">Üzenetek Kezelése</string>
+    <string name="exit_app">Kilépés az alkalmazásból</string>
+    <string name="status_active">Állapot: AKTÍV\nNem fogadott hívások figyelése.</string>
+    <string name="status_stopped">Állapot: LEÁLLÍTVA\nNincs SMS küldés.</string>
+    <string name="checking_permissions">Jogosultságok ellenőrzése...</string>
+    <string name="missing_permissions">Hiányzó jogosultságok.\nKérlek engedélyezd a működéshez.</string>
+    <string name="active_message_prefix">Aktív Üzenet:\n</string>
+    <string name="delete_message_title">Üzenet törlése</string>
+    <string name="delete_message_confirm">Biztosan törölni szeretnéd ezt az üzenetet?</string>
+    <string name="delete_button">Törlés</string>
+    <string name="cancel_button">Mégse</string>
+    <string name="save_button">Mentés</string>
+    <string name="new_message_title">Új üzenet</string>
+    <string name="edit_message_title">Üzenet szerkesztése</string>
+    <string name="enter_sms_hint">SMS üzenet megadása...</string>
+    <string name="notification_channel_name">SMS Válaszoló Szolgáltatás</string>
+    <string name="notification_title">SMS Válaszoló</string>
+    <string name="notification_active">Aktív - Hívások figyelése</string>
+    <string name="notification_stopped">Leállítva - Nincs SMS küldés</string>
+    <string name="action_stop">Leállítás</string>
+    <string name="action_start">Indítás</string>
+    <string name="default_template_text">Szabadság miatt zárva. Hamarosan nyitunk. Kérjük ne válaszoljon, ez egy automatikus üzenet.</string>
+    <string name="battery_opt_title">Akkumulátor kímélő</string>
+    <string name="battery_opt_message">Az SMS Válaszoló folyamatos működéséhez kérjük, kapcsolja ki az akkumulátor-optimalizálást az alkalmazáshoz.</string>
+    <string name="battery_opt_settings">Beállítások</string>
+    <string name="battery_opt_skip">Kihagyás</string>
+    <string name="battery_opt_manual_title">Kézi beállítás szükséges</string>
+    <string name="battery_opt_manual_message">Kérjük, keresse meg a Beállítások > Akkumulátor > Akkumulátor-optimalizálás menüpontot, és vegye ki az SMS Válaszoló-t az optimalizálás alól.</string>
+    <string name="ok_button">OK</string>
+    <string name="start_on_boot">Indítás a telefon bekapcsolásakor</string>
+</resources>
