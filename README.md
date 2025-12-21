@@ -6,6 +6,7 @@ An Android application that handles SMS auto-replies.
 - Customizable reply templates
 - Automatic replies to incoming calls/messages
 - Multilingual support (English, German, Spanish, French, Hungarian, Polish, Russian, Chinese)
+- Starts on boot and runs as a background service
 
 ## Setup
 1. Clone the repository.

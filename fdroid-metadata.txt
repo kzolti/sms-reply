@@ -1,0 +1,22 @@
+AuthorName: Zoltán KADA
+AuthorEmail: kada.zoli@gmail.com
+License: MIT
+WebSite: https://github.com/kzolti/sms-reply
+SourceCode: https://github.com/kzolti/sms-reply
+IssueTracker: https://github.com/kzolti/sms-reply/issues
+Donate: https://github.com/sponsors/kzolti
+
+Summary: Android application that handles SMS auto-replies
+
+Description:
+An Android application that handles SMS auto-replies with customizable templates.
+
+Features:
+* Customizable reply templates
+* Automatic replies to incoming calls/messages  
+* Multilingual support (English, German, Spanish, French, Hungarian, Polish, Russian, Chinese)
+* Starts on boot and runs as a background service
+
+
+The app allows users to set up automated responses for SMS messages and incoming calls, 
+making it easier to manage communication when you're busy or unavailable.
