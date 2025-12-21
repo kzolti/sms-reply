@@ -1,4 +1,4 @@
-package com.example.smsreply
+package hu.kadatsoft.smsreply
 
 import android.app.Notification
 import android.app.NotificationChannel

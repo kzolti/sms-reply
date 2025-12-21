@@ -1,4 +1,4 @@
-package com.example.smsreply
+package hu.kadatsoft.smsreply
 
 import android.content.BroadcastReceiver
 import android.content.Context
