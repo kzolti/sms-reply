@@ -19,6 +19,14 @@
     <string name="cancel_button">Annuler</string>
     <string name="save_button">Enregistrer</string>
     <string name="new_message_title">Nouveau message</string>
+    <string name="edit_message_title">Modifier le message</string>
+    <string name="enter_sms_hint">Saisir le message SMS...</string>
+    <string name="notification_channel_name">Canal du service de réponse automatique SMS</string>
+    <string name="notification_title">Réponse automatique SMS</string>
+    <string name="notification_active">Actif - Surveillance des appels</string>
+    <string name="notification_stopped">Arrêté - Pas d\'envoi de SMS</string>
+    <string name="action_stop">Arrêter</string>
+    <string name="action_start">Démarrer</string>
     <string name="default_template_text">Fermé pour les vacances. Réouverture prochainement. S\'il vous plaît ne pas répondre, ceci est un message automatique.</string>
     <string name="battery_opt_title">Optimisation de la batterie</string>
     <string name="battery_opt_message">Pour s\'assurer que SMS Reply fonctionne en continu, veuillez désactiver l\'optimisation de la batterie pour cette application.</string>
@@ -28,6 +36,8 @@
     <string name="battery_opt_manual_message">Veuillez aller dans Paramètres > Batterie > Optimisation de la batterie et exclure SMS Reply de l\'optimisation.</string>
     <string name="ok_button">OK</string>
     <string name="start_on_boot">Démarrer au démarrage de l\'appareil</string>
-    <string name="edit_message_title">Modifier le message</string>
-    <string name="enter_sms_hint">Saisir le message SMS...</string>
+    <string name="view_logs">Voir les journaux</string>
+    <string name="clear_logs">Effacer les journaux</string>
+    <string name="copy_logs">Copier les journaux</string>
+    <string name="logs_copied">Journaux copiés dans le presse-papiers</string>
 </resources>

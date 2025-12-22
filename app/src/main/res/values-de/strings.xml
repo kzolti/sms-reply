@@ -21,6 +21,12 @@
     <string name="new_message_title">Neue Nachricht</string>
     <string name="edit_message_title">Nachricht bearbeiten</string>
     <string name="enter_sms_hint">SMS-Nachricht eingeben...</string>
+    <string name="notification_channel_name">SMS Auto Antwort Service Kanal</string>
+    <string name="notification_title">SMS Auto Antwort</string>
+    <string name="notification_active">Aktiv - Überwache Anrufe</string>
+    <string name="notification_stopped">Gestoppt - Keine SMS-Versand</string>
+    <string name="action_stop">Stopp</string>
+    <string name="action_start">Start</string>
     <string name="default_template_text">Wegen Urlaub geschlossen. Wir öffnen bald wieder. Bitte antworten Sie nicht, dies ist eine automatische Nachricht.</string>
     <string name="battery_opt_title">Akku-Optimierung</string>
     <string name="battery_opt_message">Um sicherzustellen, dass SMS Reply kontinuierlich funktioniert, deaktivieren Sie bitte die Akku-Optimierung für diese App.</string>
@@ -30,4 +36,8 @@
     <string name="battery_opt_manual_message">Bitte gehen Sie zu Einstellungen > Akku > Akku-Optimierung und schließen Sie SMS Reply von der Optimierung aus.</string>
     <string name="ok_button">OK</string>
     <string name="start_on_boot">Beim Gerätestart starten</string>
+    <string name="view_logs">Protokolle anzeigen</string>
+    <string name="clear_logs">Protokolle löschen</string>
+    <string name="copy_logs">Protokolle kopieren</string>
+    <string name="logs_copied">Protokolle in die Zwischenablage kopiert</string>
 </resources>

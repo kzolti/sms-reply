@@ -36,4 +36,8 @@
     <string name="battery_opt_manual_message">Kérjük, keresse meg a Beállítások > Akkumulátor > Akkumulátor-optimalizálás menüpontot, és vegye ki az SMS Válaszoló-t az optimalizálás alól.</string>
     <string name="ok_button">OK</string>
     <string name="start_on_boot">Indítás a telefon bekapcsolásakor</string>
+    <string name="view_logs">Logok megtekintése</string>
+    <string name="clear_logs">Logok törlése</string>
+    <string name="copy_logs">Logok másolása</string>
+    <string name="logs_copied">Logok a vágólapra másolva</string>
 </resources>

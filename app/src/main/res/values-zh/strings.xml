@@ -21,6 +21,12 @@
     <string name="new_message_title">新消息</string>
     <string name="edit_message_title">编辑消息</string>
     <string name="enter_sms_hint">输入短信内容...</string>
+    <string name="notification_channel_name">短信自动回复服务通道</string>
+    <string name="notification_title">短信自动回复</string>
+    <string name="notification_active">运行中 - 正在监控通话</string>
+    <string name="notification_stopped">已停止 - 不发送短信</string>
+    <string name="action_stop">停止</string>
+    <string name="action_start">启动</string>
     <string name="default_template_text">假期休息，即将恢复营业。请勿回复，这是自动消息。</string>
     <string name="battery_opt_title">电池优化</string>
     <string name="battery_opt_message">为确保 SMS Reply 持续运行，请关闭此应用的电池优化。</string>
@@ -30,4 +36,8 @@
     <string name="battery_opt_manual_message">请前往 设置 > 电池 > 电池优化，并将 SMS Reply 排除在优化范围之外。</string>
     <string name="ok_button">确定</string>
     <string name="start_on_boot">设备启动时启动</string>
+    <string name="view_logs">查看日志</string>
+    <string name="clear_logs">清除日志</string>
+    <string name="copy_logs">复制日志</string>
+    <string name="logs_copied">日志已复制到剪贴板</string>
 </resources>

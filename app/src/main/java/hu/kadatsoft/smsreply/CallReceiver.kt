@@ -14,11 +14,13 @@ class CallReceiver : BroadcastReceiver() {
         private const val PREFS_NAME = "SmsReplyPrefs"
         private const val KEY_WAS_RINGING = "was_ringing"
         private const val KEY_INCOMING_NUMBER = "incoming_number"
+        private const val KEY_LAST_SENT_PREFIX = "last_sent_"
+        private const val COOLDOWN_MS = 60 * 1000L // 1 minute
     }
 
     override fun onReceive(context: Context, intent: Intent) {
         if (!ServiceState.isServiceRunning) {
-            Log.d(TAG, "Service is not running, ignoring call.")
+            AppLogger.d(TAG, "Service is not running, ignoring call.", context)
             return
         }
 
@@ -27,7 +29,7 @@ class CallReceiver : BroadcastReceiver() {
             val number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER)
             val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
-            Log.d(TAG, "Phone State: $stateStr, Number: $number")
+            AppLogger.d(TAG, "Phone State: $stateStr, Number: $number", context)
 
             when (stateStr) {
                 TelephonyManager.EXTRA_STATE_RINGING -> {
@@ -36,37 +38,48 @@ class CallReceiver : BroadcastReceiver() {
                         prefs.edit()
                             .putString(KEY_INCOMING_NUMBER, number)
                             .putBoolean(KEY_WAS_RINGING, true)
-                            .apply()
-                        Log.d(TAG, "Number received and saved: $number")
+                            .commit() // Synchronous for better race condition protection
+                        AppLogger.d(TAG, "Number received and saved: $number", context)
                     } else {
-                        prefs.edit().putBoolean(KEY_WAS_RINGING, true).apply()
-                        Log.d(TAG, "Ringing but no number available")
+                        prefs.edit().putBoolean(KEY_WAS_RINGING, true).commit()
+                        AppLogger.d(TAG, "Ringing but no number available", context)
                     }
                 }
                 TelephonyManager.EXTRA_STATE_OFFHOOK -> {
                     // Answered call - don't send SMS
-                    prefs.edit().putBoolean(KEY_WAS_RINGING, false).apply()
-                    Log.d(TAG, "State: OFFHOOK (Answered)")
+                    prefs.edit().putBoolean(KEY_WAS_RINGING, false).commit()
+                    AppLogger.d(TAG, "State: OFFHOOK (Answered)", context)
                 }
                 TelephonyManager.EXTRA_STATE_IDLE -> {
                     val wasRinging = prefs.getBoolean(KEY_WAS_RINGING, false)
                     val savedNumber = prefs.getString(KEY_INCOMING_NUMBER, null)
                     
-                    Log.d(TAG, "State: IDLE. WasRinging: $wasRinging, SavedNumber: $savedNumber")
+                    AppLogger.d(TAG, "State: IDLE. WasRinging: $wasRinging, SavedNumber: $savedNumber", context)
                     
                     if (wasRinging && !savedNumber.isNullOrBlank()) {
-                        Log.d(TAG, "Missed call triggered. Sending SMS.")
-                        val messageToUse = MessageRepository.getSelectedMessage(context)
-                        sendSms(context, savedNumber, messageToUse)
+                        val lastSentTime = prefs.getLong(KEY_LAST_SENT_PREFIX + savedNumber, 0L)
+                        val currentTime = System.currentTimeMillis()
+                        
+                        if (currentTime - lastSentTime < COOLDOWN_MS) {
+                            AppLogger.d(TAG, "SMS to $savedNumber skipped: Cooldown active (last sent ${ (currentTime - lastSentTime) / 1000 }s ago)", context)
+                        } else {
+                            AppLogger.d(TAG, "Missed call triggered. Sending SMS.", context)
+                            val messageToUse = MessageRepository.getSelectedMessage(context)
+                            
+                            // Update last sent time BEFORE sending to be extra safe against overlaps
+                            prefs.edit().putLong(KEY_LAST_SENT_PREFIX + savedNumber, currentTime).commit()
+                            
+                            sendSms(context, savedNumber, messageToUse)
+                        }
                     } else if (wasRinging) {
-                        Log.d(TAG, "Missed call but no valid number to send SMS to")
+                        AppLogger.d(TAG, "Missed call but no valid number to send SMS to", context)
                     }
                     
                     // Reset state
                     prefs.edit()
                         .putBoolean(KEY_WAS_RINGING, false)
                         .remove(KEY_INCOMING_NUMBER)
-                        .apply()
+                        .commit()
                 }
             }
         }
@@ -77,13 +90,13 @@ class CallReceiver : BroadcastReceiver() {
             // Check SMS permission at runtime
             if (android.content.pm.PackageManager.PERMISSION_GRANTED != 
                 androidx.core.content.ContextCompat.checkSelfPermission(context, android.Manifest.permission.SEND_SMS)) {
-                Log.e(TAG, "SMS permission not granted")
+                AppLogger.e(TAG, "SMS permission not granted", context = context)
                 return
             }
             
             // Validate phone number format
             if (phoneNumber.isBlank() || message.isBlank()) {
-                Log.e(TAG, "Invalid phone number or message")
+                AppLogger.e(TAG, "Invalid phone number or message", context = context)
                 return
             }
             
@@ -95,24 +108,24 @@ class CallReceiver : BroadcastReceiver() {
             }
             
             if (smsManager == null) {
-                Log.e(TAG, "SMS Manager not available")
+                AppLogger.e(TAG, "SMS Manager not available", context = context)
                 return
             }
             
             val parts = smsManager.divideMessage(message)
             if (parts.size > 1) {
                 smsManager.sendMultipartTextMessage(phoneNumber, null, parts, null, null)
-                Log.d(TAG, "Multipart SMS sent to $phoneNumber (${parts.size} parts)")
+                AppLogger.d(TAG, "Multipart SMS sent to $phoneNumber (${parts.size} parts)", context)
             } else {
                 smsManager.sendTextMessage(phoneNumber, null, message, null, null)
-                Log.d(TAG, "SMS sent to $phoneNumber")
+                AppLogger.d(TAG, "SMS sent to $phoneNumber", context)
             }
         } catch (e: SecurityException) {
-            Log.e(TAG, "SMS permission denied", e)
+            AppLogger.e(TAG, "SMS permission denied", e, context)
         } catch (e: IllegalArgumentException) {
-            Log.e(TAG, "Invalid SMS parameters", e)
+            AppLogger.e(TAG, "Invalid SMS parameters", e, context)
         } catch (e: Exception) {
-            Log.e(TAG, "Failed to send SMS", e)
+            AppLogger.e(TAG, "Failed to send SMS", e, context)
         }
     }
 }

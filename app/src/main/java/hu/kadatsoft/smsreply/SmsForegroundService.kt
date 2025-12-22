@@ -24,12 +24,14 @@ class SmsForegroundService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+        AppLogger.i("SmsService", "Service onCreate", this)
         createNotificationChannel()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
             ACTION_START -> {
+                AppLogger.i("SmsService", "Action START received", this)
                 ServiceState.setRunning(true)
                 try {
                     val notification = createNotification()
@@ -39,10 +41,11 @@ class SmsForegroundService : Service() {
                         startForeground(NOTIFICATION_ID, notification)
                     }
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    AppLogger.e("SmsService", "Error starting foreground", e, this)
                 }
             }
             ACTION_STOP -> {
+                AppLogger.i("SmsService", "Action STOP received", this)
                 ServiceState.setRunning(false)
                 // Stop foreground and remove notification
                 stopForeground(STOP_FOREGROUND_REMOVE)
@@ -51,6 +54,7 @@ class SmsForegroundService : Service() {
             }
             else -> {
                 // Default start (e.g. from App launch or restart)
+                AppLogger.i("SmsService", "Service started with default action: ${intent?.action}", this)
                 ServiceState.setRunning(true)
                 try {
                     val notification = createNotification()
@@ -60,7 +64,7 @@ class SmsForegroundService : Service() {
                         startForeground(NOTIFICATION_ID, notification)
                     }
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    AppLogger.e("SmsService", "Error in default start", e, this)
                 }
             }
         }
@@ -74,6 +78,7 @@ class SmsForegroundService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+        AppLogger.i("SmsService", "Service onDestroy", this)
         ServiceState.setRunning(false)
         // Make sure notification is removed
         stopForeground(STOP_FOREGROUND_REMOVE)

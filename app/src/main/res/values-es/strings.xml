@@ -19,6 +19,14 @@
     <string name="cancel_button">Cancelar</string>
     <string name="save_button">Guardar</string>
     <string name="new_message_title">Nuevo mensaje</string>
+    <string name="edit_message_title">Editar mensaje</string>
+    <string name="enter_sms_hint">Ingrese mensaje SMS...</string>
+    <string name="notification_channel_name">Canal del servicio de respuesta automática de SMS</string>
+    <string name="notification_title">Respuesta automática de SMS</string>
+    <string name="notification_active">Activo - Monitoreando llamadas</string>
+    <string name="notification_stopped">Detenido - No enviando SMS</string>
+    <string name="action_stop">Detener</string>
+    <string name="action_start">Iniciar</string>
     <string name="default_template_text">Cerrado por vacaciones. Reabriremos pronto. Por favor, no responda, este es un mensaje automático.</string>
     <string name="battery_opt_title">Optimización de batería</string>
     <string name="battery_opt_message">Para asegurar que SMS Reply funcione continuamente, desactive la optimización de batería para esta aplicación.</string>
@@ -28,6 +36,8 @@
     <string name="battery_opt_manual_message">Vaya a Ajustes > Batería > Optimización de batería y excluya SMS Reply de la optimización.</string>
     <string name="ok_button">Aceptar</string>
     <string name="start_on_boot">Iniciar al arrancar el dispositivo</string>
-    <string name="edit_message_title">Editar mensaje</string>
-    <string name="enter_sms_hint">Ingrese mensaje SMS...</string>
+    <string name="view_logs">Ver registros</string>
+    <string name="clear_logs">Borrar registros</string>
+    <string name="copy_logs">Copiar registros</string>
+    <string name="logs_copied">Registros copiados al portapapeles</string>
 </resources>

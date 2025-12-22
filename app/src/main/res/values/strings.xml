@@ -35,4 +35,8 @@
     <string name="battery_opt_manual_message">Please go to Settings > Battery > Battery Optimization and exclude SMS Reply from optimization.</string>
     <string name="ok_button">OK</string>
     <string name="start_on_boot">Start on device boot</string>
+    <string name="view_logs">View Logs</string>
+    <string name="clear_logs">Clear Logs</string>
+    <string name="copy_logs">Copy Logs</string>
+    <string name="logs_copied">Logs copied to clipboard</string>
 </resources>

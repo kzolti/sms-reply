@@ -1,6 +1,9 @@
 package hu.kadatsoft.smsreply
 
 import android.Manifest
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -134,6 +137,19 @@ class MainActivity : AppCompatActivity() {
         }
         layout.addView(bootSwitch)
 
+        // View Logs Button
+        val viewLogsButton = android.widget.Button(this).apply {
+            text = getString(R.string.view_logs)
+            setOnClickListener {
+                showLogsDialog()
+            }
+            layoutParams = android.widget.LinearLayout.LayoutParams(
+                android.widget.LinearLayout.LayoutParams.WRAP_CONTENT,
+                android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply { topMargin = 30 }
+        }
+        layout.addView(viewLogsButton)
+
         // Active Message Display
         messageTextView = TextView(this).apply {
             textSize = 14f
@@ -246,7 +262,9 @@ class MainActivity : AppCompatActivity() {
     private fun checkBatteryOptimization() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val powerManager = getSystemService(POWER_SERVICE) as PowerManager
-            if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {
+            val isIgnoring = powerManager.isIgnoringBatteryOptimizations(packageName)
+            AppLogger.d("MainActivity", "Battery optimization check: isIgnoring=$isIgnoring", this)
+            if (!isIgnoring) {
                 showBatteryOptimizationDialog()
             }
         }
@@ -287,5 +305,92 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showLogsDialog() {
+        val logs = AppLogger.getLogs(this)
+        val dialog = android.app.Dialog(this)
+        dialog.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
+
+        val rootLayout = android.widget.LinearLayout(this).apply {
+            orientation = android.widget.LinearLayout.VERTICAL
+            setPadding(40, 40, 40, 40)
+            layoutParams = android.widget.LinearLayout.LayoutParams(
+                android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
+                android.widget.LinearLayout.LayoutParams.MATCH_PARENT
+            )
+        }
+
+        // Title
+        val titleView = TextView(this).apply {
+            text = getString(R.string.view_logs)
+            textSize = 20f
+            setTypeface(null, android.graphics.Typeface.BOLD)
+            setPadding(0, 0, 0, 30)
+        }
+        rootLayout.addView(titleView)
+
+        // Scrollable Logs
+        val scrollView = android.widget.ScrollView(this).apply {
+            layoutParams = android.widget.LinearLayout.LayoutParams(
+                android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
+                0,
+                1f
+            )
+        }
+        val logTextView = TextView(this).apply {
+            text = logs
+            textSize = 12f
+            setTypeface(android.graphics.Typeface.MONOSPACE)
+        }
+        scrollView.addView(logTextView)
+        rootLayout.addView(scrollView)
+
+        // Button Bar
+        val buttonBar = android.widget.LinearLayout(this).apply {
+            orientation = android.widget.LinearLayout.HORIZONTAL
+            gravity = android.view.Gravity.CENTER
+            setPadding(0, 30, 0, 0)
+        }
+
+        val clearBtn = android.widget.Button(this).apply {
+            text = getString(R.string.clear_logs)
+            setOnClickListener {
+                AppLogger.clearLogs(this@MainActivity)
+                logTextView.text = "No logs found."
+                android.widget.Toast.makeText(this@MainActivity, getString(R.string.clear_logs), android.widget.Toast.LENGTH_SHORT).show()
+            }
+            layoutParams = android.widget.LinearLayout.LayoutParams(0, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+                rightMargin = 20
+            }
+        }
+
+        val copyBtn = android.widget.Button(this).apply {
+            text = getString(R.string.copy_logs)
+            setOnClickListener {
+                val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clip = ClipData.newPlainText("SmsReplyLogs", AppLogger.getLogs(this@MainActivity))
+                clipboard.setPrimaryClip(clip)
+                android.widget.Toast.makeText(this@MainActivity, getString(R.string.logs_copied), android.widget.Toast.LENGTH_SHORT).show()
+            }
+            layoutParams = android.widget.LinearLayout.LayoutParams(0, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+        }
+
+        buttonBar.addView(clearBtn)
+        buttonBar.addView(copyBtn)
+        rootLayout.addView(buttonBar)
+
+        dialog.setContentView(rootLayout)
+
+        // Set Dialog size
+        dialog.window?.let { window ->
+            val displayMetrics = android.util.DisplayMetrics()
+            windowManager.defaultDisplay.getMetrics(displayMetrics)
+            val width = (displayMetrics.widthPixels * 0.9).toInt()
+            val height = (displayMetrics.heightPixels * 0.85).toInt()
+            window.setLayout(width, height)
+        }
+        
+        dialog.show()
     }
 }

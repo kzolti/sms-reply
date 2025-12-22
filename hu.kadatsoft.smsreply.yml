@@ -1,5 +1,5 @@
 Categories:
-  - Phone
+  - Phone & SMS
 License: MIT
 AuthorName: Zoltán KADA
 WebSite: https://github.com/kzolti/sms-reply
@@ -30,6 +30,7 @@ Builds:
     commit: v1.1
     gradle:
       - yes
+    java: 17
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags

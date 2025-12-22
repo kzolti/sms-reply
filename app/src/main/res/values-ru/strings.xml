@@ -21,6 +21,12 @@
     <string name="new_message_title">Новое сообщение</string>
     <string name="edit_message_title">Изменить сообщение</string>
     <string name="enter_sms_hint">Введите SMS сообщение...</string>
+    <string name="notification_channel_name">Канал службы автоматического ответа по SMS</string>
+    <string name="notification_title">Автоответчик SMS</string>
+    <string name="notification_active">Активен - Мониторинг звонков</string>
+    <string name="notification_stopped">Остановлен - SMS не отправляются</string>
+    <string name="action_stop">Стоп</string>
+    <string name="action_start">Старт</string>
     <string name="default_template_text">Закрыто на каникулы. Скоро откроемся. Пожалуйста, не отвечайте, это автоматическое сообщение.</string>
     <string name="battery_opt_title">Оптимизация батареи</string>
     <string name="battery_opt_message">Чтобы обеспечить непрерывную работу SMS Reply, пожалуйста, отключите оптимизацию батареи для этого приложения.</string>
@@ -30,4 +36,8 @@
     <string name="battery_opt_manual_message">Пожалуйста, перейдите в Настройки > Батарея > Оптимизация батареи и исключите SMS Reply из оптимизации.</string>
     <string name="ok_button">ОК</string>
     <string name="start_on_boot">Запускать при загрузке устройства</string>
+    <string name="view_logs">Просмотр логов</string>
+    <string name="clear_logs">Очистить логи</string>
+    <string name="copy_logs">Копировать логи</string>
+    <string name="logs_copied">Логи скопированы в буфер обмена</string>
 </resources>

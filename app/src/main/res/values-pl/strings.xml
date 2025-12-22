@@ -19,6 +19,14 @@
     <string name="cancel_button">Anuluj</string>
     <string name="save_button">Zapisz</string>
     <string name="new_message_title">Nowa wiadomość</string>
+    <string name="edit_message_title">Edytuj wiadomość</string>
+    <string name="enter_sms_hint">Wprowadź wiadomość SMS...</string>
+    <string name="notification_channel_name">Kanał usługi automatycznej odpowiedzi SMS</string>
+    <string name="notification_title">Automatyczna odpowiedź SMS</string>
+    <string name="notification_active">Aktywny - Monitorowanie połączeń</string>
+    <string name="notification_stopped">Zatrzymany - Brak wysyłania SMS</string>
+    <string name="action_stop">Zatrzymaj</string>
+    <string name="action_start">Start</string>
     <string name="default_template_text">Zamknięte z powodu urlopu. Wkrótce otworzymy ponownie. Prosimy nie odpowiadać, to jest wiadomość automatyczna.</string>
     <string name="battery_opt_title">Optymalizacja baterii</string>
     <string name="battery_opt_message">Aby zapewnić ciągłe działanie SMS Reply, wyłącz optymalizację baterii dla tej aplikacji.</string>
@@ -28,6 +36,8 @@
     <string name="battery_opt_manual_message">Przejdź do Ustawienia > Bateria > Optymalizacja baterii i wyklucz SMS Reply z optymalizacji.</string>
     <string name="ok_button">OK</string>
     <string name="start_on_boot">Uruchamiaj przy starcie urządzenia</string>
-    <string name="edit_message_title">Edytuj wiadomość</string>
-    <string name="enter_sms_hint">Wprowadź wiadomość SMS...</string>
+    <string name="view_logs">Wyświetl logi</string>
+    <string name="clear_logs">Wyczyść logi</string>
+    <string name="copy_logs">Kopiuj logi</string>
+    <string name="logs_copied">Logi skopiowane do schowka</string>
 </resources>
