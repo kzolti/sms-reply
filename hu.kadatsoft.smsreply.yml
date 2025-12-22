@@ -8,9 +8,9 @@ IssueTracker: https://github.com/kzolti/sms-reply/issues
 Donate: https://github.com/sponsors/kzolti
 
 AutoName: SmsReply
-Summary: Android application that handles SMS auto-replies
+Summary: Handles SMS auto-replies
 Description: |-
-    An Android application that handles SMS auto-replies with customizable templates.
+    Handles SMS auto-replies with customizable templates.
 
     Features:
     * Customizable reply templates
