@@ -7,7 +7,6 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.content.pm.ServiceInfo
 import android.os.Build
 import android.os.IBinder
@@ -16,10 +15,11 @@ import androidx.core.app.NotificationCompat
 class SmsForegroundService : Service() {
 
     companion object {
-        const val CHANNEL_ID = "SmsReplyChannel"
+        const val CHANNEL_ID = "SmsReplyChannelPersistent"
         const val NOTIFICATION_ID = 1
         const val ACTION_START = "ACTION_START"
         const val ACTION_STOP = "ACTION_STOP"
+        const val ACTION_DISMISSED = "ACTION_DISMISSED"
     }
 
     override fun onCreate() {
@@ -51,6 +51,17 @@ class SmsForegroundService : Service() {
                 stopForeground(STOP_FOREGROUND_REMOVE)
                 // Stop the service completely
                 stopSelf()
+            }
+            ACTION_DISMISSED -> {
+                AppLogger.i("SmsService", "Notification dismissed by user, restoring...", this)
+                if (ServiceState.isServiceRunning) {
+                    val notification = createNotification()
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                        startForeground(NOTIFICATION_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
+                    } else {
+                        startForeground(NOTIFICATION_ID, notification)
+                    }
+                }
             }
             else -> {
                 // Default start (e.g. from App launch or restart)
@@ -118,12 +129,26 @@ class SmsForegroundService : Service() {
             PendingIntent.FLAG_IMMUTABLE
         )
 
-        return NotificationCompat.Builder(this, CHANNEL_ID)
+        // Dismissed Intent
+        val deleteIntent = Intent(this, SmsForegroundService::class.java).apply {
+            action = ACTION_DISMISSED
+        }
+        val deletePendingIntent = PendingIntent.getService(
+            this,
+            1,
+            deleteIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(getString(R.string.notification_title))
             .setContentText(statusText)
             .setSmallIcon(icon)
             .setContentIntent(contentPendingIntent)
+            .setDeleteIntent(deletePendingIntent)
             .setOngoing(true) // Persistent
+            .setPriority(NotificationCompat.PRIORITY_MAX)
+            .setCategory(NotificationCompat.CATEGORY_SERVICE)
             .addAction(
                 if (isRunning) android.R.drawable.ic_media_pause else android.R.drawable.ic_media_play, 
                 actionTitle, 
@@ -131,6 +156,11 @@ class SmsForegroundService : Service() {
             )
             .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
             .build()
+            
+        // Explicitly set flags to prevent dismissal on some device manufacturers
+        notification.flags = notification.flags or Notification.FLAG_NO_CLEAR or Notification.FLAG_ONGOING_EVENT
+        
+        return notification
     }
 
     private fun createNotificationChannel() {
@@ -138,7 +168,7 @@ class SmsForegroundService : Service() {
             val serviceChannel = NotificationChannel(
                 CHANNEL_ID,
                 getString(R.string.notification_channel_name),
-                NotificationManager.IMPORTANCE_LOW 
+                NotificationManager.IMPORTANCE_HIGH 
             )
             val manager = getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(serviceChannel)
