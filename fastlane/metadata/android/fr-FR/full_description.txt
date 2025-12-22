@@ -1,0 +1,11 @@
+SmsReply est une application Android qui gère les réponses SMS automatiques avec des modèles personnalisables.
+
+Fonctionnalités:
+• Modèles de réponse personnalisables pour différentes situations
+• Réponses automatiques aux appels et messages entrants
+• Support multilingue (anglais, allemand, espagnol, français, hongrois, polonais, russe, chinois)
+• Démarre automatiquement au démarrage et fonctionne comme service en arrière-plan
+• Gestion de l'optimisation de la batterie pour un fonctionnement fiable
+• Interface utilisateur simple et intuitive
+
+L'application permet aux utilisateurs de configurer des réponses automatisées pour les messages SMS et les appels entrants, facilitant la communication lorsqu'ils sont occupés ou indisponibles.
