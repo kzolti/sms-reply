@@ -30,14 +30,12 @@ Builds:
     commit: v1.2
     gradle:
       - yes
-    java: 17
 
   - versionName: '1.1'
     versionCode: 2
     commit: v1.1
     gradle:
       - yes
-    java: 17
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
