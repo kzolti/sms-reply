@@ -1,28 +1,49 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-gradle wrapper
+# Mindig a script könyvtárába lép
+cd "$(dirname "$0")"
 
-git clone https://gitlab.com/kada.zoli/fdroiddata.git
-cd fdroiddata
+run() {
+    echo -e "\n+ $*"   # parancs kiírása egy új sorban
+    "$@"               # parancs futtatása a stdout/stderr-rel
+}
 
-printf "sdk_path: /opt/android-sdk\nserverwebroot: /tmp/fdroid\n" > config.yml
-chmod 600 config.yml
-mkdir -p /tmp/fdroid
+# Gradle wrapper létrehozása (ha gradle elérhető)
+run gradle wrapper || echo "Gradle nem található, ugorjuk."
 
-yay -S python311
+# Klónozzuk a fdroiddata repót
+run git clone https://gitlab.com/kada.zoli/fdroiddata.git
+run cd fdroiddata
 
-python3.11 -m venv fdroid-env
+# config.yml létrehozása
+run printf "sdk_path: /opt/android-sdk\nserverwebroot: /tmp/fdroid\n" > config.yml
+run chmod 600 config.yml
+run mkdir -p /tmp/fdroid
+
+# fdroid-env hozzáadása .gitignore-hoz
+grep -qxF "fdroid-env/" .gitignore || run echo "fdroid-env/" >> .gitignore
+
+# Python 3.11 telepítése
+run yay -S --needed --noconfirm python311
+
+# virtuális környezet létrehozása
+run python3.11 -m venv fdroid-env
+# shell option miatt source nem run függvénnyel
+echo "+ source fdroid-env/bin/activate"
 source fdroid-env/bin/activate
 
-pip install --upgrade pip
-pip install fdroidserver
+# pip frissítése és fdroidserver telepítése
+run pip install --upgrade pip
+run pip install fdroidserver
 
+# Android build-tools PATH
 export PATH=/home/zolti/Android/Sdk/build-tools/34.0.0:$PATH
 
-fdroid readmeta
-fdroid import --url https://github.com/kzolti/sms-reply --subdir app
-fdroid checkupdates hu.kadatsoft.smsreply
-fdroid rewritemeta hu.kadatsoft.smsreply
-fdroid lint hu.kadatsoft.smsreply
-fdroid build -v -l hu.kadatsoft.smsreply
+# F-Droid parancsok a saját appodra
+run fdroid readmeta metadata/hu.kadatsoft.smsreply.yml
+run fdroid import --url https://github.com/kzolti/sms-reply --subdir app
+run fdroid checkupdates hu.kadatsoft.smsreply
+run fdroid rewritemeta hu.kadatsoft.smsreply
+run fdroid lint hu.kadatsoft.smsreply
+run fdroid build -v -l hu.kadatsoft.smsreply
