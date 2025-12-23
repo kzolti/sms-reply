@@ -7,32 +7,32 @@ SourceCode: https://github.com/kzolti/sms-reply
 IssueTracker: https://github.com/kzolti/sms-reply/issues
 Donate: https://github.com/sponsors/kzolti
 
-AutoName: SmsReply
+AutoName: SMS Reply
 Summary: Handles SMS auto-replies
 Description: |-
-    Handles SMS auto-replies with customizable templates.
+  Handles SMS auto-replies with customizable templates.
 
-    Features:
-    * Customizable reply templates
-    * Automatic replies to incoming calls/messages
-    * Multilingual support (English, German, Spanish, French, Hungarian, Polish, Russian, Chinese)
-    * Starts on boot and runs as a background service
+  Features:
+  * Customizable reply templates
+  * Automatic replies to incoming calls/messages
+  * Multilingual support (English, German, Spanish, French, Hungarian, Polish, Russian, Chinese)
+  * Starts on boot and runs as a background service
 
-    The app allows users to set up automated responses for SMS messages and incoming calls,
-    making it easier to manage communication when you're busy or unavailable.
+  The app allows users to set up automated responses for SMS messages and incoming calls,
+  making it easier to manage communication when you're busy or unavailable.
 
 RepoType: git
 Repo: https://github.com/kzolti/sms-reply
 
 Builds:
-  - versionName: '1.3'
-    versionCode: 4
-    commit: v1.3
+  - versionName: '1.4'
+    versionCode: 5
+    commit: 1966d0133e255da70439ebdfe953d3528b1f887b
     subdir: app
     gradle:
       - yes
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: '1.3'
-CurrentVersionCode: 4
+CurrentVersion: '1.4'
+CurrentVersionCode: 5
