@@ -23,6 +23,7 @@ run mkdir -p /tmp/fdroid
 
 # fdroid-env hozzáadása .gitignore-hoz
 grep -qxF "fdroid-env/" .gitignore || run echo "fdroid-env/" >> .gitignore
+grep -qxF "config.yml/" .gitignore || run echo "config.yml" >> .gitignore
 
 # Python 3.11 telepítése
 run yay -S --needed --noconfirm python311
@@ -38,10 +39,12 @@ run pip install --upgrade pip
 run pip install fdroidserver
 
 # Android build-tools PATH
+echo "+ export PATH=/home/zolti/Android/Sdk/build-tools/34.0.0:\$PATH"
 export PATH=/home/zolti/Android/Sdk/build-tools/34.0.0:$PATH
 
 # F-Droid parancsok a saját appodra
-run fdroid readmeta metadata/hu.kadatsoft.smsreply.yml
+# run git add .
+# run git commit -m "Add fdroid config and env to .gitignore"
 run fdroid import --url https://github.com/kzolti/sms-reply --subdir app
 run fdroid checkupdates hu.kadatsoft.smsreply
 run fdroid rewritemeta hu.kadatsoft.smsreply
