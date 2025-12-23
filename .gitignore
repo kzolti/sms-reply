@@ -8,3 +8,11 @@
 /.idea/assetWizardSettings.xml
 .setting
 /build
+# F-Droid related
+fdroiddata
+
+# IDE and editor files
+.marscode/
+*.swp
+*.swo
+*~
