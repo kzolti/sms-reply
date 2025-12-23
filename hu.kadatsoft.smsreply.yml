@@ -27,7 +27,7 @@ Repo: https://github.com/kzolti/sms-reply
 Builds:
   - versionName: '1.4'
     versionCode: 5
-    commit: 1966d0133e255da70439ebdfe953d3528b1f887b
+    commit: fb10db2db1534c53161c6b485e64a7fbda0133ad
     subdir: app
     gradle:
       - yes

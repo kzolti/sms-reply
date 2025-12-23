@@ -27,3 +27,11 @@ fdroid checkupdates hu.kadatsoft.smsreply
 fdroid rewritemeta hu.kadatsoft.smsreply
 fdroid lint hu.kadatsoft.smsreply
 fdroid build -v -l hu.kadatsoft.smsreply
+
+
+fdroid readmeta
+fdroid import --url https://github.com/kzolti/sms-reply --subdir app
+fdroid checkupdates hu.kadatsoft.smsreply
+fdroid rewritemeta hu.kadatsoft.smsreply
+fdroid lint hu.kadatsoft.smsreply
+fdroid build -v -l hu.kadatsoft.smsreply
