@@ -7,6 +7,11 @@ android {
     namespace = "hu.kadatsoft.smsreply"
     compileSdk = 34
 
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+
     defaultConfig {
         applicationId = "hu.kadatsoft.smsreply"
         minSdk = 29
