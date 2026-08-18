@@ -2,6 +2,12 @@
 
 An Android application that handles SMS auto-replies.
 
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/packages/hu.kadatsoft.smsreply/)
+
+Or download the latest APK from the [Releases Section](https://github.com/kzolti/sms-reply/releases/latest).
+
 ## Features
 - Customizable reply templates
 - Automatic replies to incoming calls/messages
