@@ -40,4 +40,7 @@
     <string name="clear_logs">Borrar registros</string>
     <string name="copy_logs">Copiar registros</string>
     <string name="logs_copied">Registros copiados al portapapeles</string>
+    <string name="reply_to_sms">Responder también a los SMS entrantes</string>
+    <string name="notification_active_calls">Activo - Monitoreando llamadas</string>
+    <string name="notification_active_calls_and_sms">Activo - Llamadas y SMS</string>
 </resources>

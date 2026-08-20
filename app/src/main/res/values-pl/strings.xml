@@ -40,4 +40,7 @@
     <string name="clear_logs">Wyczyść logi</string>
     <string name="copy_logs">Kopiuj logi</string>
     <string name="logs_copied">Logi skopiowane do schowka</string>
+    <string name="reply_to_sms">Odpowiadaj również na przychodzące SMS</string>
+    <string name="notification_active_calls">Aktywny - Monitorowanie połączeń</string>
+    <string name="notification_active_calls_and_sms">Aktywny - Połączenia i SMS</string>
 </resources>

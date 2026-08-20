@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "hu.kadatsoft.smsreply"
-    compileSdk = 34
+    compileSdk = 36
 
     dependenciesInfo {
         includeInApk = false
@@ -15,9 +15,9 @@ android {
     defaultConfig {
         applicationId = "hu.kadatsoft.smsreply"
         minSdk = 29
-        targetSdk = 34
-        versionCode = 4
-        versionName = "1.3"
+        targetSdk = 36
+        versionCode = 5
+        versionName = "1.4"
     }
 
     buildTypes {

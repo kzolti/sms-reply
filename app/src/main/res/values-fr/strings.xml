@@ -40,4 +40,7 @@
     <string name="clear_logs">Effacer les journaux</string>
     <string name="copy_logs">Copier les journaux</string>
     <string name="logs_copied">Journaux copiés dans le presse-papiers</string>
+    <string name="reply_to_sms">Répondre aussi aux SMS entrants</string>
+    <string name="notification_active_calls">Actif - Surveillance des appels</string>
+    <string name="notification_active_calls_and_sms">Actif - Appels et SMS</string>
 </resources>

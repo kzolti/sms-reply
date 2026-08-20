@@ -19,10 +19,19 @@ class CallReceiver : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
+        // Szinkronizáljuk az in-memory állapotot a perzisztált értékkel.
+        // Android 16 megölheti a service process-t, de a SharedPreferences megmarad.
+        ServiceState.syncFromPrefs(context)
+
         if (!ServiceState.isServiceRunning) {
-            AppLogger.d(TAG, "Service is not running, ignoring call.", context)
+            // Még a perzisztált állapot szerint sem fut – nem kell SMS
+            AppLogger.d(TAG, "Service is not running (persisted=false), ignoring call.", context)
             return
         }
+
+        // Az állapot szerint futnia kellene, de a service process esetleg le lett ölve.
+        // Elindítjuk (újra), hogy legközelebb biztosan fusson.
+        tryRestartServiceIfNeeded(context)
 
         if (intent.action == TelephonyManager.ACTION_PHONE_STATE_CHANGED) {
             val stateStr = intent.getStringExtra(TelephonyManager.EXTRA_STATE)
@@ -82,6 +91,25 @@ class CallReceiver : BroadcastReceiver() {
                         .commit()
                 }
             }
+        }
+    }
+
+    private fun tryRestartServiceIfNeeded(context: Context) {
+        // Ha a service process-t megölte az OS, de a felhasználó nem kézte manuálisan leállítani,
+        // újraindítjuk a foreground service-t.
+        AppLogger.d(TAG, "Attempting to ensure service is running...", context)
+        try {
+            val serviceIntent = Intent(context, SmsForegroundService::class.java).apply {
+                action = SmsForegroundService.ACTION_START
+            }
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                context.startForegroundService(serviceIntent)
+            } else {
+                context.startService(serviceIntent)
+            }
+            AppLogger.d(TAG, "Service restart requested.", context)
+        } catch (e: Exception) {
+            AppLogger.e(TAG, "Failed to restart service", e, context)
         }
     }
 

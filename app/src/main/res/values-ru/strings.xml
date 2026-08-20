@@ -40,4 +40,7 @@
     <string name="clear_logs">Очистить логи</string>
     <string name="copy_logs">Копировать логи</string>
     <string name="logs_copied">Логи скопированы в буфер обмена</string>
+    <string name="reply_to_sms">Отвечать и на входящие SMS</string>
+    <string name="notification_active_calls">Активен - Мониторинг звонков</string>
+    <string name="notification_active_calls_and_sms">Активен - Звонки и SMS</string>
 </resources>

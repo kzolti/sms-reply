@@ -40,4 +40,7 @@
     <string name="clear_logs">清除日志</string>
     <string name="copy_logs">复制日志</string>
     <string name="logs_copied">日志已复制到剪贴板</string>
+    <string name="reply_to_sms">也回复收到的短信</string>
+    <string name="notification_active_calls">运行中 - 正在监控通话</string>
+    <string name="notification_active_calls_and_sms">运行中 - 通话和短信</string>
 </resources>

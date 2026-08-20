@@ -39,4 +39,7 @@
     <string name="clear_logs">Clear Logs</string>
     <string name="copy_logs">Copy Logs</string>
     <string name="logs_copied">Logs copied to clipboard</string>
+    <string name="reply_to_sms">Also reply to incoming SMS</string>
+    <string name="notification_active_calls">Active - Monitoring calls</string>
+    <string name="notification_active_calls_and_sms">Active - Calls &amp; SMS</string>
 </resources>

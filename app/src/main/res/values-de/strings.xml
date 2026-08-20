@@ -40,4 +40,7 @@
     <string name="clear_logs">Protokolle löschen</string>
     <string name="copy_logs">Protokolle kopieren</string>
     <string name="logs_copied">Protokolle in die Zwischenablage kopiert</string>
+    <string name="reply_to_sms">Auch auf eingehende SMS antworten</string>
+    <string name="notification_active_calls">Aktiv - Überwache Anrufe</string>
+    <string name="notification_active_calls_and_sms">Aktiv - Anrufe &amp; SMS</string>
 </resources>

@@ -1,6 +1,8 @@
 Az SmsReply egy Android alkalmazás, amely automatikus SMS válaszokat kezel testreszabható sablonokkal.
 
 Funkciók:
+• Android 16 támogatás - megbízható működés a legújabb Android verziókon
+• Automatikus válasz SMS-ekre és nem fogadott hívásokra is
 • Testreszabható válasz sablonok különböző helyzetekhez
 • Automatikus válaszok bejövő hívásokra és üzenetekre
 • Többnyelvű támogatás (angol, német, spanyol, francia, magyar, lengyel, orosz, kínai)

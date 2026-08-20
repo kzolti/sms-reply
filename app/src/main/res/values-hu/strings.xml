@@ -40,4 +40,7 @@
     <string name="clear_logs">Logok törlése</string>
     <string name="copy_logs">Logok másolása</string>
     <string name="logs_copied">Logok a vágólapra másolva</string>
+    <string name="reply_to_sms">SMS-ekre is válaszoljon</string>
+    <string name="notification_active_calls">Aktív - Hívások figyelése</string>
+    <string name="notification_active_calls_and_sms">Aktív - Hívások és SMS</string>
 </resources>

@@ -15,4 +15,4 @@ An Android application that handles SMS auto-replies.
 
 ## Support
 If you like this project, you can buy me a coffee (approx. 1 EUR):
-[GitHub Sponsors](https://github.com/sponsors/kzolti) or via [Revolut](https://revolut.me/zoltnifdgo)
+[GitHub Sponsors](https://github.com/sponsors/kzolti) or via [Revolut](https://revolut.me/zoltnifdgo?note=sms-reply)

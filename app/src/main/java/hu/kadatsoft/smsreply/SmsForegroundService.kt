@@ -20,6 +20,7 @@ class SmsForegroundService : Service() {
         const val ACTION_START = "ACTION_START"
         const val ACTION_STOP = "ACTION_STOP"
         const val ACTION_DISMISSED = "ACTION_DISMISSED"
+        const val ACTION_UPDATE_NOTIFICATION = "ACTION_UPDATE_NOTIFICATION"
     }
 
     override fun onCreate() {
@@ -32,7 +33,7 @@ class SmsForegroundService : Service() {
         when (intent?.action) {
             ACTION_START -> {
                 AppLogger.i("SmsService", "Action START received", this)
-                ServiceState.setRunning(true)
+                ServiceState.setRunning(this, true)
                 try {
                     val notification = createNotification()
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
@@ -46,7 +47,7 @@ class SmsForegroundService : Service() {
             }
             ACTION_STOP -> {
                 AppLogger.i("SmsService", "Action STOP received", this)
-                ServiceState.setRunning(false)
+                ServiceState.setRunning(this, false)
                 // Stop foreground and remove notification
                 stopForeground(STOP_FOREGROUND_REMOVE)
                 // Stop the service completely
@@ -63,10 +64,17 @@ class SmsForegroundService : Service() {
                     }
                 }
             }
+            ACTION_UPDATE_NOTIFICATION -> {
+                // Notification szöveg frissítése (pl. SMS toggle változott)
+                if (ServiceState.isServiceRunning) {
+                    val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    nm.notify(NOTIFICATION_ID, createNotification())
+                }
+            }
             else -> {
                 // Default start (e.g. from App launch or restart)
                 AppLogger.i("SmsService", "Service started with default action: ${intent?.action}", this)
-                ServiceState.setRunning(true)
+                ServiceState.setRunning(this, true)
                 try {
                     val notification = createNotification()
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
@@ -90,7 +98,7 @@ class SmsForegroundService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         AppLogger.i("SmsService", "Service onDestroy", this)
-        ServiceState.setRunning(false)
+        ServiceState.setRunning(this, false)
         // Make sure notification is removed
         stopForeground(STOP_FOREGROUND_REMOVE)
         
@@ -99,28 +107,45 @@ class SmsForegroundService : Service() {
         notificationManager.cancel(NOTIFICATION_ID)
     }
 
+    /**
+     * Android 16+ esetén, ha a felhasználó az app-ot swipe-olja a Recents-ből,
+     * a rendszer meghívja ezt. Visszaindítjuk a service-t ha aktív kell legyen.
+     */
+    override fun onTaskRemoved(rootIntent: Intent?) {
+        super.onTaskRemoved(rootIntent)
+        AppLogger.i("SmsService", "onTaskRemoved called – scheduling restart", this)
+        // START_STICKY miatt a rendszer újraindítja, de explicit is kérjük
+        val restartIntent = Intent(applicationContext, SmsForegroundService::class.java).apply {
+            action = ACTION_START
+            setPackage(packageName)
+        }
+        val pendingIntent = android.app.PendingIntent.getService(
+            applicationContext,
+            1,
+            restartIntent,
+            android.app.PendingIntent.FLAG_ONE_SHOT or android.app.PendingIntent.FLAG_IMMUTABLE
+        )
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as android.app.AlarmManager
+        alarmManager.set(
+            android.app.AlarmManager.ELAPSED_REALTIME,
+            android.os.SystemClock.elapsedRealtime() + 1000,
+            pendingIntent
+        )
+    }
+
 
 
     private fun createNotification(): Notification {
-        val isRunning = ServiceState.isServiceRunning
-        
-        val statusText = if (isRunning) getString(R.string.notification_active) else getString(R.string.notification_stopped)
-        val icon = R.drawable.ic_stat_running
-        val actionTitle = if (isRunning) getString(R.string.action_stop) else getString(R.string.action_start)
-        val actionIntentAction = if (isRunning) ACTION_STOP else ACTION_START
+        val smsReplyEnabled = ServiceState.isSmsReplyEnabled(this)
 
-        // Action Button Intent
-        val actionIntent = Intent(this, SmsForegroundService::class.java).apply {
-            action = actionIntentAction
+        val statusText = if (ServiceState.isServiceRunning) {
+            if (smsReplyEnabled) getString(R.string.notification_active_calls_and_sms)
+            else getString(R.string.notification_active_calls)
+        } else {
+            getString(R.string.notification_stopped)
         }
-        val actionPendingIntent = PendingIntent.getService(
-            this, 
-            0, 
-            actionIntent, 
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
 
-        // Open App Intent
+        // Open App Intent (koppintásra megnyílik az UI)
         val contentIntent = Intent(this, MainActivity::class.java)
         val contentPendingIntent = PendingIntent.getActivity(
             this,
@@ -129,7 +154,7 @@ class SmsForegroundService : Service() {
             PendingIntent.FLAG_IMMUTABLE
         )
 
-        // Dismissed Intent
+        // Dismissed Intent (ha mégis le lehetne törölni, visszaállítjuk)
         val deleteIntent = Intent(this, SmsForegroundService::class.java).apply {
             action = ACTION_DISMISSED
         }
@@ -143,25 +168,21 @@ class SmsForegroundService : Service() {
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(getString(R.string.notification_title))
             .setContentText(statusText)
-            .setSmallIcon(icon)
+            .setSmallIcon(R.drawable.ic_stat_running)
             .setContentIntent(contentPendingIntent)
             .setDeleteIntent(deletePendingIntent)
-            .setOngoing(true) // Persistent
+            .setOngoing(true) // Persistent, nem törölhető
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setCategory(NotificationCompat.CATEGORY_SERVICE)
-            .addAction(
-                if (isRunning) android.R.drawable.ic_media_pause else android.R.drawable.ic_media_play, 
-                actionTitle, 
-                actionPendingIntent
-            )
             .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
             .build()
-            
+
         // Explicitly set flags to prevent dismissal on some device manufacturers
         notification.flags = notification.flags or Notification.FLAG_NO_CLEAR or Notification.FLAG_ONGOING_EVENT
-        
+
         return notification
     }
+
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity() {
     private val REQUIRED_PERMISSIONS = mutableListOf(
         Manifest.permission.READ_PHONE_STATE,
         Manifest.permission.READ_CALL_LOG,
-        Manifest.permission.SEND_SMS
+        Manifest.permission.SEND_SMS,
+        Manifest.permission.RECEIVE_SMS
     ).apply {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             add(Manifest.permission.POST_NOTIFICATIONS)
@@ -137,6 +138,27 @@ class MainActivity : AppCompatActivity() {
         }
         layout.addView(bootSwitch)
 
+        // SMS Reply Toggle
+        val smsReplySwitch = android.widget.CheckBox(this).apply {
+            text = getString(R.string.reply_to_sms)
+            isChecked = ServiceState.isSmsReplyEnabled(this@MainActivity)
+            setOnCheckedChangeListener { _, isChecked ->
+                ServiceState.setSmsReplyEnabled(this@MainActivity, isChecked)
+                // Notification szöveg azonnali frissítése
+                if (ServiceState.isServiceRunning) {
+                    val updateIntent = android.content.Intent(this@MainActivity, SmsForegroundService::class.java).apply {
+                        action = SmsForegroundService.ACTION_UPDATE_NOTIFICATION
+                    }
+                    startService(updateIntent)
+                }
+            }
+            layoutParams = android.widget.LinearLayout.LayoutParams(
+                android.widget.LinearLayout.LayoutParams.WRAP_CONTENT,
+                android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply { topMargin = 16 }
+        }
+        layout.addView(smsReplySwitch)
+
         // View Logs Button
         val viewLogsButton = android.widget.Button(this).apply {
             text = getString(R.string.view_logs)
@@ -168,7 +190,8 @@ class MainActivity : AppCompatActivity() {
 
         if (allPermissionsGranted()) {
             checkBatteryOptimization()
-            if (!ServiceState.isServiceRunning) {
+            // Perzisztált állapotból ellenőrizzük – ne indítsuk el ha már fut
+            if (!ServiceState.isRunningPersisted(this)) {
                  startService() 
             }
         } else {
@@ -180,6 +203,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        // Szinkronizáljuk a SharedPreferences-ből – Android 16 megölhette a service-t
+        ServiceState.syncFromPrefs(this)
         runOnUiThread {
             updateActiveMessage()
             updateUI(ServiceState.isServiceRunning)
